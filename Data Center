@@ -68,14 +68,37 @@ class GestorBiblioteca
             return;
         }
 
-        Console.Write("Nombre del solicitante: ");
-        string nombre = Console.ReadLine();
+string nombre, servicio, fecha;
 
-        Console.Write("Tipo de servicio: ");
-        string servicio = Console.ReadLine();
+do
+{
+    Console.Write("Nombre del solicitante: ");
+    nombre = Console.ReadLine();
 
-        Console.Write("Fecha (DD/MM/AAAA): ");
-        string fecha = Console.ReadLine();
+    if (string.IsNullOrWhiteSpace(nombre))
+        Console.WriteLine("El nombre no puede estar vacio.");
+
+} while (string.IsNullOrWhiteSpace(nombre));
+
+do
+{
+    Console.Write("Tipo de servicio: ");
+    servicio = Console.ReadLine();
+
+    if (string.IsNullOrWhiteSpace(servicio))
+        Console.WriteLine("El servicio no puede estar vacio.");
+
+} while (string.IsNullOrWhiteSpace(servicio));
+
+do
+{
+    Console.Write("Fecha (DD/MM/AAAA): ");
+    fecha = Console.ReadLine();
+
+    if (string.IsNullOrWhiteSpace(fecha))
+        Console.WriteLine("La fecha no puede estar vacia.");
+
+} while (string.IsNullOrWhiteSpace(fecha));
 
         NodoSolicitud nuevo = new NodoSolicitud(
             codigo, nombre, servicio, fecha);
