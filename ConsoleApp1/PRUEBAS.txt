@@ -1,0 +1,12 @@
+PRUEBAS FINALES DEL SISTEMA DE BIBLIOTECA
+
+1. Registro de solicitudes: CORRECTO
+2. Busqueda de solicitudes: CORRECTO
+3. Modificacion de solicitudes: CORRECTO
+4. Guardado en archivo: CORRECTO
+5. Lectura de archivo al reiniciar: CORRECTO
+6. Eliminacion de solicitudes: CORRECTO
+
+Plus: Organización del NodoSolicitud y GestorBiblioteca con sus propias clases.
+
+Resultado: Pruebas realizadas satisfactoriamente.
