@@ -4,6 +4,26 @@ class GestorBiblioteca
 {
     NodoSolicitud cabeza = null;
 
+    void GuardarArchivo()
+    {
+        System.IO.StreamWriter archivo = new System.IO.StreamWriter("solicitudes.txt");
+
+        NodoSolicitud actual = cabeza;
+
+        while (actual != null)
+        {
+            archivo.WriteLine(actual.codigo + "|" +
+                              actual.solicitante + "|" +
+                              actual.tipoServicio + "|" +
+                              actual.fecha + "|" +
+                              actual.estado);
+
+            actual = actual.siguiente;
+        }
+
+        archivo.Close();
+    }
+
     int LeerCodigo()
     {
         int codigo;
@@ -74,6 +94,7 @@ class GestorBiblioteca
         }
 
         Console.WriteLine("Solicitud registrada correctamente.");
+        GuardarArchivo();
         Pausar();
     }
 
@@ -109,6 +130,7 @@ class GestorBiblioteca
 
         Console.Write("Nuevo estado (Pendiente/Atendido/Devuelto): ");
         s.estado = Console.ReadLine();
+        GuardarArchivo();
 
         Console.WriteLine("Solicitud modificada correctamente.");
         Pausar();
@@ -129,6 +151,7 @@ class GestorBiblioteca
         if (cabeza.codigo == codigo)
         {
             cabeza = cabeza.siguiente;
+            GuardarArchivo();
             Console.WriteLine("Solicitud eliminada correctamente.");
             Pausar();
             return;
@@ -143,6 +166,7 @@ class GestorBiblioteca
         if (actual.siguiente != null)
         {
             actual.siguiente = actual.siguiente.siguiente;
+            GuardarArchivo();
             Console.WriteLine("Solicitud eliminada correctamente.");
         }
         else
