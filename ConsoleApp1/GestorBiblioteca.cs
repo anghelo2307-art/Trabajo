@@ -4,6 +4,43 @@ class GestorBiblioteca
 {
     NodoSolicitud cabeza = null;
 
+    void LeerArchivo()
+    {
+        if (!System.IO.File.Exists("solicitudes.txt"))
+            return;
+
+        System.IO.StreamReader archivo =
+            new System.IO.StreamReader("solicitudes.txt");
+
+        while (!archivo.EndOfStream)
+        {
+            string linea = archivo.ReadLine();
+            string[] datos = linea.Split('|');
+
+            if (datos.Length == 5 && int.TryParse(datos[0], out int codigo))
+            {
+                NodoSolicitud nuevo = new NodoSolicitud(
+                    codigo, datos[1], datos[2], datos[3]);
+
+                nuevo.estado = datos[4];
+
+                if (cabeza == null)
+                    cabeza = nuevo;
+                else
+                {
+                    NodoSolicitud actual = cabeza;
+
+                    while (actual.siguiente != null)
+                        actual = actual.siguiente;
+
+                    actual.siguiente = nuevo;
+                }
+            }
+        }
+
+        archivo.Close();
+    }
+
     void GuardarArchivo()
     {
         System.IO.StreamWriter archivo = new System.IO.StreamWriter("solicitudes.txt");
@@ -133,6 +170,7 @@ class GestorBiblioteca
         GuardarArchivo();
 
         Console.WriteLine("Solicitud modificada correctamente.");
+
         Pausar();
     }
 
@@ -271,6 +309,7 @@ class GestorBiblioteca
 
     public void Ejecutar()
     {
+        LeerArchivo();
         int opcion = 0;
 
         do
